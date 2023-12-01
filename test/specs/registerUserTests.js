@@ -22,5 +22,19 @@ describe("Test Case 1: Registering a User", () => {
         await expect(signupPageTitle).toBe(expectedTitle);
     });
 
-    it("Should ")
+    it("Should fill in the name and email fields", async () => {
+        const signupButton = await $(page.signupButton);
+        await signupButton.waitForDisplayed();
+        await signupButton.click();
+        const signupNameField = await $(page.signupNameField);
+        await signupNameField.setValue("John Does");
+        const signupEmailField = await $(page.signupEmailField);
+        await signupEmailField.setValue("johndoestester@outlook.com");
+        const signupName = await signupNameField.getValue();
+        const expectedSignupName = "John Does";
+        const signupEmail = await signupEmailField.getValue();
+        const expectedSignupEmail = "johndoestester@outlook.com";
+        await expect(signupName).toBe(expectedSignupName);
+        await expect(signupEmail).toBe(expectedSignupEmail); 
+    })
 })

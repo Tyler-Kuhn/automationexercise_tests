@@ -6,6 +6,6 @@ module.exports = {
     signupButton: 'a[href="/login"]',
 //SignUp / Login Page
     //Fields
-    nameField: 'input[placeholder="Name"]',
-    emailField: 'input[data-qa="signup-email"]'
+    signupNameField: 'input[placeholder="Name"]',
+    signupEmailField: 'input[data-qa="signup-email"]'
 }
