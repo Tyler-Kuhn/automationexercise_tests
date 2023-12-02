@@ -14,18 +14,18 @@ describe("Test Case 1: Registering a User", () => {
     });
 
     it("Should navigate to the Signup / Login Page", async () => {
-        const signupButton = await $(page.signupButton);
-        await signupButton.waitForDisplayed();
-        await signupButton.click();
-        const signupPageTitle = await browser.getTitle();
+        const signupLoginButton = await $(page.signupLoginButton);
+        await signupLoginButton.waitForDisplayed();
+        await signupLoginButton.click();
+        const signupLoginPageTitle = await browser.getTitle();
         const expectedTitle = "Automation Exercise - Signup / Login";
-        await expect(signupPageTitle).toBe(expectedTitle);
+        await expect(signupLoginPageTitle).toBe(expectedTitle);
     });
 
     it("Should fill in the name and email fields", async () => {
-        const signupButton = await $(page.signupButton);
-        await signupButton.waitForDisplayed();
-        await signupButton.click();
+        const signupLoginButton = await $(page.signupLoginButton);
+        await signupLoginButton.waitForDisplayed();
+        await signupLoginButton.click();
         const signupNameField = await $(page.signupNameField);
         await signupNameField.setValue("John Does");
         const signupEmailField = await $(page.signupEmailField);
@@ -36,5 +36,24 @@ describe("Test Case 1: Registering a User", () => {
         const expectedSignupEmail = "johndoestester@outlook.com";
         await expect(signupName).toBe(expectedSignupName);
         await expect(signupEmail).toBe(expectedSignupEmail); 
-    })
+    });
+
+    it("Should submit a new user", async () => {
+        const signupLoginButton = await $(page.signupLoginButton);
+        await signupLoginButton.waitForDisplayed();
+        await signupLoginButton.click();
+        const signupNameField = await $(page.signupNameField);
+        await signupNameField.setValue("John Does");
+        const signupEmailField = await $(page.signupEmailField);
+        await signupEmailField.setValue("johndoestester@outlook.com");
+        const signupButton = await $(page.signupButton);
+        await signupButton.click();
+        const signupTitle = await browser.getTitle();
+        const expectedTitle = "Automation Exercise - Signup";
+        await expect(signupTitle).toBe(expectedTitle);
+    });
+
+    it("Should Fill out the account Info fields", async () => {
+
+    });
 })
