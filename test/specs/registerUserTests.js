@@ -46,7 +46,7 @@ describe("Test Case 1: Registering a User", () => {
         await signupEmailField.setValue("johndoestester1@outlook.com");
         const signupButton = await $(page.signupButton);
         await signupButton.click();
-        await expect(await helper.getBElementByText("ENTER ACCOUNT INFORMATION")).toBeExisting();
+        await expect(await helper.getBElementByText("Enter Account Information")).toBeExisting();
     });
 
    /* it("Should Fill out the account Info fields", async () => {
