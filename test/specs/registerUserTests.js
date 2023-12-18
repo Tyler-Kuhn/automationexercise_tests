@@ -17,9 +17,7 @@ describe("Test Case 1: Registering a User", () => {
         const signupLoginButton = await $(page.signupLoginButton);
         await signupLoginButton.waitForDisplayed();
         await signupLoginButton.click();
-        const signupLoginPageTitle = await browser.getTitle();
-        const expectedTitle = "Automation Exercise - Signup / Login";
-        await expect(signupLoginPageTitle).toBe(expectedTitle);
+        await expect(await helper.getH2ElementByText("New User Signup!")).toBeExisting();
     });
 
     it("Should fill in the name and email fields", async () => {
@@ -45,15 +43,13 @@ describe("Test Case 1: Registering a User", () => {
         const signupNameField = await $(page.signupNameField);
         await signupNameField.setValue("John Does");
         const signupEmailField = await $(page.signupEmailField);
-        await signupEmailField.setValue("johndoestester@outlook.com");
+        await signupEmailField.setValue("johndoestester1@outlook.com");
         const signupButton = await $(page.signupButton);
         await signupButton.click();
-        const signupTitle = await browser.getTitle();
-        const expectedTitle = "Automation Exercise - Signup";
-        await expect(signupTitle).toBe(expectedTitle);
+        await expect(await helper.getBElementByText("ENTER ACCOUNT INFORMATION")).toBeExisting();
     });
 
-    it("Should Fill out the account Info fields", async () => {
+   /* it("Should Fill out the account Info fields", async () => {
 
-    });
+    });*/
 })
