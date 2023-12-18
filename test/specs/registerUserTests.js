@@ -14,16 +14,12 @@ describe("Test Case 1: Registering a User", () => {
     });
 
     it("Should navigate to the Signup / Login Page", async () => {
-        const signupLoginButton = await $(page.signupLoginButton);
-        await signupLoginButton.waitForDisplayed();
-        await signupLoginButton.click();
+        await page.clickSignupLoginButton();
         await expect(await helper.getH2ElementByText("New User Signup!")).toBeExisting();
     });
 
     it("Should fill in the name and email fields", async () => {
-        const signupLoginButton = await $(page.signupLoginButton);
-        await signupLoginButton.waitForDisplayed();
-        await signupLoginButton.click();
+        await page.clickSignupLoginButton();
         const signupNameField = await $(page.signupNameField);
         await signupNameField.setValue("John Does");
         const signupEmailField = await $(page.signupEmailField);
@@ -37,19 +33,16 @@ describe("Test Case 1: Registering a User", () => {
     });
 
     it("Should submit a new user", async () => {
-        const signupLoginButton = await $(page.signupLoginButton);
-        await signupLoginButton.waitForDisplayed();
-        await signupLoginButton.click();
-        const signupNameField = await $(page.signupNameField);
-        await signupNameField.setValue("John Does");
-        const signupEmailField = await $(page.signupEmailField);
-        await signupEmailField.setValue("johndoestester1@outlook.com");
-        const signupButton = await $(page.signupButton);
-        await signupButton.click();
+        await page.clickSignupLoginButton();
+        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.clickSignupButton();
         await expect(await helper.getBElementByText("Enter Account Information")).toBeExisting();
     });
 
-   /* it("Should Fill out the account Info fields", async () => {
-
-    });*/
+    it("Should Fill out the account Info fields", async () => {
+        await page.clickSignupLoginButton();
+        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.clickSignupButton();
+        await page.fillAccountDetails("TestPass1!");
+    });
 })
