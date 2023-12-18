@@ -44,5 +44,92 @@ describe("Test Case 1: Registering a User", () => {
         await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
         await page.clickSignupButton();
         await page.fillAccountDetails("TestPass1!");
+        const signupPasswordField = await $(page.signupPasswordField);
+        const actualPassword = await signupPasswordField.getValue();
+        const expectedPassword = "TestPass1!";
+        await page.selectNewsletterCheckBox();
+        await page.selectOptinCheckBox();
+        await page.fillOutPersonalDetails("John", "Does", "John's Place");
+        const firstNameField = await $(page.firstNameField);
+        const actualFirstName = await firstNameField.getValue();
+        const expectedFirstname = "John";
+        const lastNameField = await $(page.lastNameField);
+        const actualLastName = await lastNameField.getValue();
+        const expectedLastname = "Does";
+        const companyField = await $(page.companyField);
+        const actualCompany = await companyField.getValue();
+        const expectedCompany = "John's Place";
+        await expect(actualPassword).toBe(expectedPassword);
+        await expect(actualFirstName).toBe(expectedFirstname);
+        await expect(actualLastName).toBe(expectedLastname);
+        await expect(actualCompany).toBe(expectedCompany);
     });
+
+    it("Should Fill in the location Info", async () => {
+        await page.clickSignupLoginButton();
+        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.clickSignupButton();
+        await page.fillAccountDetails("TestPass1!");
+        await page.selectNewsletterCheckBox();
+        await page.selectOptinCheckBox();
+        await page.fillOutPersonalDetails("John", "Does", "John's Place");
+        const addressField = await $(page.addressField);
+        await addressField.setValue("102 Big John Ln.");
+        const actualAddress = await addressField.getValue();
+        const expectedAddress = "102 Big John Ln.";
+        const addressTwoField = await $(page.addressTwoField);
+        await addressTwoField.setValue("Apt. B");
+        const actualAddressTwo = await addressTwoField.getValue();
+        const expectedAddressTwo = "Apt. B";
+        const countryDropDown = await $(page.countryDropDown);
+        await countryDropDown.click();
+        const unitedStatesOption = await $(page.unitedStatesOption);
+        await unitedStatesOption.waitForDisplayed();
+        await unitedStatesOption.click();
+        const actualCountry = await countryDropDown.getValue();
+        const expectedCountry = "United States";
+
+ })
+/*
+    it("Should Create an Account", async () => {
+        await page.clickSignupLoginButton();
+        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.clickSignupButton();
+        await page.fillAccountDetails("TestPass1!");
+        await page.selectNewsletterCheckBox();
+        await page.selectOptinCheckBox();
+        await page.fillOutPersonalDetails("John", "Does", "John's Place");
+        await page.clickCreateAccountButton();
+        await expect(await helper.getBElementByText("Account Created!")).toBeExisting();
+    });
+
+    it("Should Verify Account is Logged in", async () => {
+        await page.clickSignupLoginButton();
+        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.clickSignupButton();
+        await page.fillAccountDetails("TestPass1!");
+        await page.selectNewsletterCheckBox();
+        await page.selectOptinCheckBox();
+        await page.fillOutPersonalDetails("John", "Does", "John's Place");
+        await page.clickCreateAccountButton();
+        await page.clickContinueButton();
+        await expect(await helper.getBElementByText("John")).toBeExisting();
+    });
+
+    it("Should Delete the Account", async () => {
+        await page.clickSignupLoginButton();
+        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.clickSignupButton();
+        await page.fillAccountDetails("TestPass1!");
+        await page.selectNewsletterCheckBox();
+        await page.selectOptinCheckBox();
+        await page.fillOutPersonalDetails("John", "Does", "John's Place");
+        await page.clickCreateAccountButton();
+        await page.clickContinueButton();
+        const deleteAccountButton = await $(page.deleteAccountButton);
+        await deleteAccountButton.waitForDisplayed();
+        await deleteAccountButton.click();
+        await expect(await helper.getBElementByText("Account Deleted!")).toBeExisting();
+        await page.clickContinueButton();
+    });*/
 })

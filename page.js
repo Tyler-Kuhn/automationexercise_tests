@@ -44,6 +44,7 @@ module.exports = {
 
     countryDropDown: 'select[data-qa="country"]',
         //Country Options
+        unitedStatesOption: 'option[value="United States"]',
     //Checkboxes
     newsletterCheckBox: 'input[id="newsletter"]',
     optinCheckBox: 'input[id="optin"]',
@@ -89,5 +90,34 @@ module.exports = {
         const yearOption1986 = await $(this.yearOption1986);
         await yearOption1986.waitForDisplayed();
         await yearOption1986.click();
+    },
+    selectNewsletterCheckBox: async function () {
+        const newsletterCheckBox = await $(this.newsletterCheckBox);
+        await newsletterCheckBox.waitForDisplayed();
+        await newsletterCheckBox.click();
+    },
+    selectOptinCheckBox: async function () {
+        const optinCheckBox = await $(this.optinCheckBox);
+        await optinCheckBox.waitForDisplayed();
+        await optinCheckBox.click();
+    },
+    fillOutPersonalDetails: async function (firstName, lastName, company) {
+        const firstNameField = await $(this.firstNameField);
+        await firstNameField.waitForDisplayed();
+        await firstNameField.setValue(firstName);
+        const lastNameField = await $(this.lastNameField);
+        await lastNameField.setValue(lastName);
+        const companyField = await $(this.companyField);
+        await companyField.setValue(company);
+    },
+    clickCreateAccountButton: async function () {
+        const createAccountButton = await $(this.createAccountButton);
+        await createAccountButton.waitForDisplayed();
+        await createAccountButton.click();
+    },
+    clickContinueButton: async function () {
+        const continueButton = await $(this.continueButton);
+        await continueButton.waitForDisplayed();
+        await continueButton.click();
     }
 }
