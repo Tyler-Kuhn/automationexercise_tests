@@ -4,6 +4,7 @@ module.exports = {
     homepageTitle: 'head > title',
     //Nav Buttons
     signupLoginButton: 'a[href="/login"]',
+    deleteAccountButton: 'a[href="/delete_account"]',
 //SignUp / Login Page
     //Fields
     signupNameField: 'input[placeholder="Name"]', //Works for Signup Page aswell
@@ -35,4 +36,7 @@ module.exports = {
     optinCheckBox: 'input[id="optin"]',
     //Buttons
     createAccountButton: 'button[data-qa="create-account"]',
+//Account Created Page
+    //Buttons
+    continueButton: 'a[data-qa="continue-button"]',
 }
