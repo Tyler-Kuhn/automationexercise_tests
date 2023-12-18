@@ -73,24 +73,46 @@ describe("Test Case 1: Registering a User", () => {
         await page.selectNewsletterCheckBox();
         await page.selectOptinCheckBox();
         await page.fillOutPersonalDetails("John", "Does", "John's Place");
+        await page.fillOutAddressDetails("102 Big John Ln.", "Apt. B");
+        await page.fillOutStateDetails("New York", "New York", "10001");
+        await page.fillOutMobileNumber("5555555555");
+        //Verifing Address 1
         const addressField = await $(page.addressField);
-        await addressField.setValue("102 Big John Ln.");
         const actualAddress = await addressField.getValue();
         const expectedAddress = "102 Big John Ln.";
+        await expect(actualAddress).toBe(expectedAddress);
+        //Verifing Address 2
         const addressTwoField = await $(page.addressTwoField);
-        await addressTwoField.setValue("Apt. B");
         const actualAddressTwo = await addressTwoField.getValue();
         const expectedAddressTwo = "Apt. B";
+        await expect(actualAddressTwo).toBe(expectedAddressTwo);
+        //Verifiing Country
         const countryDropDown = await $(page.countryDropDown);
-        await countryDropDown.click();
-        const unitedStatesOption = await $(page.unitedStatesOption);
-        await unitedStatesOption.waitForDisplayed();
-        await unitedStatesOption.click();
         const actualCountry = await countryDropDown.getValue();
         const expectedCountry = "United States";
+        await expect(actualCountry).toBe(expectedCountry);
+        //Verifing State
+        const stateField = await $(page.stateField);
+        const actualState = await stateField.getValue();
+        const expectedState = "New York";
+        await expect(actualState).toBe(expectedState);
+        //Verifing City
+        const cityField = await $(page.cityField);
+        const actualCity = await cityField.getValue();
+        const expectedCity = "New York";
+        await expect(actualCity).toBe(expectedCity);
+        //Verifing Zip
+        const zipCodeField = await $(page.zipCodeField);
+        const actualZip = await zipCodeField.getValue();
+        const expectedZip = "10001";
+        await expect(actualZip).toBe(expectedZip);
+        //Verifing Mobile Number
+        const mobileNumberField = await $(page.mobileNumberField);
+        const actualMobileNumber = await mobileNumberField.getValue();
+        const expectedMobileNumber = "5555555555";
+        await expect(actualMobileNumber).toBe(expectedMobileNumber);
+    });
 
- })
-/*
     it("Should Create an Account", async () => {
         await page.clickSignupLoginButton();
         await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
@@ -99,6 +121,9 @@ describe("Test Case 1: Registering a User", () => {
         await page.selectNewsletterCheckBox();
         await page.selectOptinCheckBox();
         await page.fillOutPersonalDetails("John", "Does", "John's Place");
+        await page.fillOutAddressDetails("102 Big John Ln.", "Apt. B");
+        await page.fillOutStateDetails("New York", "New York", "10001");
+        await page.fillOutMobileNumber("5555555555");
         await page.clickCreateAccountButton();
         await expect(await helper.getBElementByText("Account Created!")).toBeExisting();
     });
@@ -111,6 +136,9 @@ describe("Test Case 1: Registering a User", () => {
         await page.selectNewsletterCheckBox();
         await page.selectOptinCheckBox();
         await page.fillOutPersonalDetails("John", "Does", "John's Place");
+        await page.fillOutAddressDetails("102 Big John Ln.", "Apt. B");
+        await page.fillOutStateDetails("New York", "New York", "10001");
+        await page.fillOutMobileNumber("5555555555");
         await page.clickCreateAccountButton();
         await page.clickContinueButton();
         await expect(await helper.getBElementByText("John")).toBeExisting();
@@ -124,6 +152,9 @@ describe("Test Case 1: Registering a User", () => {
         await page.selectNewsletterCheckBox();
         await page.selectOptinCheckBox();
         await page.fillOutPersonalDetails("John", "Does", "John's Place");
+        await page.fillOutAddressDetails("102 Big John Ln.", "Apt. B");
+        await page.fillOutStateDetails("New York", "New York", "10001");
+        await page.fillOutMobileNumber("5555555555");
         await page.clickCreateAccountButton();
         await page.clickContinueButton();
         const deleteAccountButton = await $(page.deleteAccountButton);
@@ -131,5 +162,5 @@ describe("Test Case 1: Registering a User", () => {
         await deleteAccountButton.click();
         await expect(await helper.getBElementByText("Account Deleted!")).toBeExisting();
         await page.clickContinueButton();
-    });*/
+    });
 })

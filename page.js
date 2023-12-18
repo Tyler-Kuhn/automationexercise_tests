@@ -119,5 +119,28 @@ module.exports = {
         const continueButton = await $(this.continueButton);
         await continueButton.waitForDisplayed();
         await continueButton.click();
+    },
+    fillOutAddressDetails: async function (address1, address2) {
+        const addressField = await $(this.addressField);
+        await addressField.setValue(address1);
+        const addressTwoField = await $(this.addressTwoField);
+        await addressTwoField.setValue(address2);
+        const countryDropDown = await $(this.countryDropDown);
+        await countryDropDown.click();
+        const unitedStatesOption = await $(this.unitedStatesOption);
+        await unitedStatesOption.waitForDisplayed();
+        await unitedStatesOption.click();
+    },
+    fillOutStateDetails: async function (state, city, zipcode) {
+        const stateField = await $(this.stateField);
+        await stateField.setValue(state);
+        const cityField = await $(this.cityField);
+        await cityField.setValue(city);
+        const zipCodeField = await $(this.zipCodeField);
+        await zipCodeField.setValue(zipcode);
+    },
+    fillOutMobileNumber: async function (number) {
+        const mobileNumberField = await $(this.mobileNumberField);
+        await mobileNumberField.setValue(number);
     }
 }
