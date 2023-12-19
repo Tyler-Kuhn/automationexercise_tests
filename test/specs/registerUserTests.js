@@ -21,11 +21,11 @@ describe("Test Case 1: Registering a User", () => {
     it("Should fill in the name and email fields", async () => {
         await page.clickSignupLoginButton();
         const signupNameField = await $(page.signupNameField);
-        await signupNameField.setValue("John Does");
+        await signupNameField.setValue("John");
         const signupEmailField = await $(page.signupEmailField);
         await signupEmailField.setValue("johndoestester@outlook.com");
         const signupName = await signupNameField.getValue();
-        const expectedSignupName = "John Does";
+        const expectedSignupName = "John";
         const signupEmail = await signupEmailField.getValue();
         const expectedSignupEmail = "johndoestester@outlook.com";
         await expect(signupName).toBe(expectedSignupName);
@@ -34,14 +34,14 @@ describe("Test Case 1: Registering a User", () => {
 
     it("Should submit a new user", async () => {
         await page.clickSignupLoginButton();
-        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.fillOutSignupFields("John", "johndoestester@outlook.com");
         await page.clickSignupButton();
         await expect(await helper.getBElementByText("Enter Account Information")).toBeExisting();
     });
 
     it("Should Fill out the account Info fields", async () => {
         await page.clickSignupLoginButton();
-        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.fillOutSignupFields("John", "johndoestester@outlook.com");
         await page.clickSignupButton();
         await page.fillAccountDetails("TestPass1!");
         const signupPasswordField = await $(page.signupPasswordField);
@@ -67,7 +67,7 @@ describe("Test Case 1: Registering a User", () => {
 
     it("Should Fill in the location Info", async () => {
         await page.clickSignupLoginButton();
-        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.fillOutSignupFields("John", "johndoestester@outlook.com");
         await page.clickSignupButton();
         await page.fillAccountDetails("TestPass1!");
         await page.selectNewsletterCheckBox();
@@ -115,7 +115,7 @@ describe("Test Case 1: Registering a User", () => {
 
     it("Should Create an Account", async () => {
         await page.clickSignupLoginButton();
-        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.fillOutSignupFields("John", "johndoestester@outlook.com");
         await page.clickSignupButton();
         await page.fillAccountDetails("TestPass1!");
         await page.selectNewsletterCheckBox();
@@ -126,11 +126,17 @@ describe("Test Case 1: Registering a User", () => {
         await page.fillOutMobileNumber("5555555555");
         await page.clickCreateAccountButton();
         await expect(await helper.getBElementByText("Account Created!")).toBeExisting();
+        //Clean Up
+        await page.clickContinueButton();
+        const deleteAccountButton = await $(page.deleteAccountButton);
+        await deleteAccountButton.waitForDisplayed();
+        await deleteAccountButton.click();
+        await page.clickContinueButton();
     });
 
     it("Should Verify Account is Logged in", async () => {
         await page.clickSignupLoginButton();
-        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.fillOutSignupFields("John", "johndoestester@outlook.com");
         await page.clickSignupButton();
         await page.fillAccountDetails("TestPass1!");
         await page.selectNewsletterCheckBox();
@@ -141,12 +147,20 @@ describe("Test Case 1: Registering a User", () => {
         await page.fillOutMobileNumber("5555555555");
         await page.clickCreateAccountButton();
         await page.clickContinueButton();
-        await expect(await helper.getBElementByText("John")).toBeExisting();
+        const accountLoggedIn = await $(page.accountLoggedIn);
+        const actualAccount = await accountLoggedIn.getText();
+        const expectedAccount = "John";
+        await expect(actualAccount).toBe(expectedAccount);
+        //Clean Up
+        const deleteAccountButton = await $(page.deleteAccountButton);
+        await deleteAccountButton.waitForDisplayed();
+        await deleteAccountButton.click();
+        await page.clickContinueButton();
     });
 
     it("Should Delete the Account", async () => {
         await page.clickSignupLoginButton();
-        await page.fillOutSignupFields("John Does", "johndoestester@outlook.com");
+        await page.fillOutSignupFields("John", "johndoestester@outlook.com");
         await page.clickSignupButton();
         await page.fillAccountDetails("TestPass1!");
         await page.selectNewsletterCheckBox();

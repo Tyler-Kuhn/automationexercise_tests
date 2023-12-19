@@ -5,6 +5,7 @@ module.exports = {
     //Nav Buttons
     signupLoginButton: 'a[href="/login"]',
     deleteAccountButton: 'a[href="/delete_account"]',
+    accountLoggedIn: '#header > div > div > div > div.col-sm-8 > div > ul > li:nth-child(10) > a > b',
 //SignUp / Login Page
     //Fields
     signupNameField: 'input[placeholder="Name"]', //Works for Signup Page aswell
@@ -67,6 +68,7 @@ module.exports = {
     },
     clickSignupButton: async function () {
         const signupButton = await $(this.signupButton);
+        await signupButton.waitForDisplayed();
         await signupButton.click();
     },
     fillAccountDetails: async function (password) {
