@@ -185,5 +185,5 @@ describe("Test Case 1: Registering a User", () => {
         await deleteAccountButton.click();
         await expect(await helper.getBElementByText("Account Deleted!")).toBeExisting();
         await page.clickContinueButton();
-    });
+    }); 
 })

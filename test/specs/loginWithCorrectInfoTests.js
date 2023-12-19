@@ -1,4 +1,4 @@
-/*const page = require("../../page.js");
+const page = require("../../page.js");
 const helper = require("../../helper.js");
 
 const password = "TestPass1!"
@@ -62,4 +62,4 @@ describe("Test Case 2: Login With Correct Info", () => {
         await expect(actualEmail).toBe(expectedEmail);
         await expect(actualPassword).toBe(expectedPassword);
     });
-})*/
+})

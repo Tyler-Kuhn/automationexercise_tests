@@ -169,6 +169,7 @@ module.exports = {
     },
     fillOutMobileNumber: async function (number) {
         const mobileNumberField = await $(this.mobileNumberField);
+        await mobileNumberField.waitForDisplayed();
         await mobileNumberField.setValue(number);
     }
 }

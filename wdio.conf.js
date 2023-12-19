@@ -52,9 +52,20 @@ exports.config = {
     //
     capabilities: [{
         browserName: 'firefox'
-    },{
-        browserName: 'chrome'
-    }],
+    },/*{
+       browserName: 'chrome',
+        'goog:chromeOptions': {
+            prefs: {
+                'profile.managed_default_content_settings.autofill': 2,
+                'autofill': {
+                    'enabled': false
+                },
+                'credentials_enable_service': false,
+                'profile.password_manager_enabled': false
+            },
+            args: ['--disable-infobars', '--disable-extensions']
+        }
+    }*/],
 
     //
     // ===================
