@@ -3,15 +3,20 @@ module.exports = {
     //Titles
     homepageTitle: 'head > title',
     //Nav Buttons
+    homeButton: 'a[href="/"]',
     signupLoginButton: 'a[href="/login"]',
     deleteAccountButton: 'a[href="/delete_account"]',
+    logoutButton: 'a[href="/logout"]',
     accountLoggedIn: '#header > div > div > div > div.col-sm-8 > div > ul > li:nth-child(10) > a > b',
 //SignUp / Login Page
     //Fields
     signupNameField: 'input[placeholder="Name"]', //Works for Signup Page aswell
     signupEmailField: 'input[data-qa="signup-email"]', //Works for Signup Page aswell
+    loginEmailField: 'input[data-qa="login-email"]',
+    loginPasswordField: 'input[data-qa="login-password"]',
     //Buttons
     signupButton: 'button[data-qa="signup-button"]',
+    loginButton: 'button[data-qa="login-button"]',
 //Signup Page
     //Fields
     signupPasswordField: 'input[data-qa="password"]',
@@ -55,6 +60,27 @@ module.exports = {
     //Buttons
     continueButton: 'a[data-qa="continue-button"]',
 //Functions
+    clickHomeButton: async function () {
+        const homeButton = await $(this.homeButton);
+        await homeButton.waitForDisplayed();
+        await homeButton.click();
+    },
+    clickLogout: async function () {
+        const logoutButton = await $(this.logoutButton);
+        await logoutButton.waitForDisplayed();
+        await logoutButton.click();
+    },
+    loginToAccount: async function (email, password) {
+        const loginEmailField = await $(this.loginEmailField);
+        await loginEmailField.waitForDisplayed();
+        await loginEmailField.setValue(email);
+        const loginPasswordField = await $(this.loginPasswordField);
+        await loginPasswordField.waitForDisplayed();
+        await loginPasswordField.setValue(password);
+        const loginButton = await $(this.loginButton);
+        await loginButton.waitForDisplayed();
+        await loginButton.click();
+    },
     clickSignupLoginButton: async function () {
         const signupLoginButton = await $(this.signupLoginButton);
         await signupLoginButton.waitForDisplayed();
