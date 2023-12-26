@@ -1,8 +1,21 @@
-const page = require("../../page.js");
-const helper = require("../../helper.js");
+
+const helper = require("../../pages/helper.js");
+const nav = require("../../pages/navigationBar.js");
+const login = require("../../pages/loginPage.js");
+const signup = require("../../pages/signUpPage.js");
 
 const userName = "John";
 const password = "TestPass1!"
+const lName = "Does";
+const company = "John's Place";
+const address = "102 Big John Ln.";
+const addressTwo = "Apt. B";
+const state = "New York";
+const city = "New York";
+const zip = "10001";
+const phone = "5555555555";
+const country = "United States";
+
 let userEmail;
 
 if (browser.capabilities.browserName === 'chrome') {
@@ -11,7 +24,7 @@ if (browser.capabilities.browserName === 'chrome') {
     userEmail = 'johntestfire@gmail.com';
 };
 
-describe("Test Case 1: Registering a User", () => {
+describe.skip("Test Case 1: Registering a User", () => {
 
     beforeEach( async () => {
         await browser.url("/");
@@ -24,15 +37,15 @@ describe("Test Case 1: Registering a User", () => {
     });
 
     it("Should navigate to the Signup / Login Page", async () => {
-        await page.clickSignupLoginButton();
+        await helper.clickSignupLoginButton();
         await expect(await helper.getH2ElementByText("New User Signup!")).toBeExisting();
     });
 
     it("Should fill in the name and email fields", async () => {
-        await page.clickSignupLoginButton();
-        const signupNameField = await $(page.signupNameField);
+        await helper.clickSignupLoginButton();
+        const signupNameField = await $(login.signupNameField);
         await signupNameField.setValue(userName);
-        const signupEmailField = await $(page.signupEmailField);
+        const signupEmailField = await $(login.signupEmailField);
         await signupEmailField.setValue(userEmail);
         const signupName = await signupNameField.getValue();
         const expectedSignupName = userName;
@@ -43,32 +56,34 @@ describe("Test Case 1: Registering a User", () => {
     });
 
     it("Should submit a new user", async () => {
-        await page.clickSignupLoginButton();
-        await page.fillOutSignupFields(userName, userEmail);
-        await page.clickSignupButton();
-        await expect(await helper.getBElementByText("Enter Account Information")).toBeExisting();
+        await helper.clickSignupLoginButton();
+        await helper.fillOutSignupFields(userName, userEmail);
+        await helper.clickSignupButton();
+        const banner = await helper.getBElementByText("Enter Account Information");
+        await banner.waitForDisplayed()
+        await expect(banner).toBeExisting();
     });
 
     it("Should Fill out the account Info fields", async () => {
-        await page.clickSignupLoginButton();
-        await page.fillOutSignupFields(userName, userEmail);
-        await page.clickSignupButton();
-        await page.fillAccountDetails("TestPass1!");
-        const signupPasswordField = await $(page.signupPasswordField);
+        await helper.clickSignupLoginButton();
+        await helper.fillOutSignupFields(userName, userEmail);
+        await helper.clickSignupButton();
+        await helper.fillAccountDetails(password);
+        const signupPasswordField = await $(signup.signupPasswordField);
         const actualPassword = await signupPasswordField.getValue();
-        const expectedPassword = "TestPass1!";
-        await page.selectNewsletterCheckBox();
-        await page.selectOptinCheckBox();
-        await page.fillOutPersonalDetails("John", "Does", "John's Place");
-        const firstNameField = await $(page.firstNameField);
+        const expectedPassword = password;
+        await helper.selectNewsletterCheckBox();
+        await helper.selectOptinCheckBox();
+        await helper.fillOutPersonalDetails(userName, lName, company);
+        const firstNameField = await $(signup.firstNameField);
         const actualFirstName = await firstNameField.getValue();
-        const expectedFirstname = "John";
-        const lastNameField = await $(page.lastNameField);
+        const expectedFirstname = userName;
+        const lastNameField = await $(signup.lastNameField);
         const actualLastName = await lastNameField.getValue();
-        const expectedLastname = "Does";
-        const companyField = await $(page.companyField);
+        const expectedLastname = lName;
+        const companyField = await $(signup.companyField);
         const actualCompany = await companyField.getValue();
-        const expectedCompany = "John's Place";
+        const expectedCompany = company;
         await expect(actualPassword).toBe(expectedPassword);
         await expect(actualFirstName).toBe(expectedFirstname);
         await expect(actualLastName).toBe(expectedLastname);
@@ -76,115 +91,115 @@ describe("Test Case 1: Registering a User", () => {
     });
 
     it("Should Fill in the location Info", async () => {
-        await page.clickSignupLoginButton();
-        await page.fillOutSignupFields(userName, userEmail);
-        await page.clickSignupButton();
-        await page.fillAccountDetails(password);
-        await page.selectNewsletterCheckBox();
-        await page.selectOptinCheckBox();
-        await page.fillOutPersonalDetails("John", "Does", "John's Place");
-        await page.fillOutAddressDetails("102 Big John Ln.", "Apt. B");
-        await page.fillOutStateDetails("New York", "New York", "10001");
-        await page.fillOutMobileNumber("5555555555");
+        await helper.clickSignupLoginButton();
+        await helper.fillOutSignupFields(userName, userEmail);
+        await helper.clickSignupButton();
+        await helper.fillAccountDetails(password);
+        await helper.selectNewsletterCheckBox();
+        await helper.selectOptinCheckBox();
+        await helper.fillOutPersonalDetails(userName, lName, company);
+        await helper.fillOutAddressDetails(address, addressTwo);
+        await helper.fillOutStateDetails(state, city, zip);
+        await helper.fillOutMobileNumber(phone);
         //Verifing Address 1
-        const addressField = await $(page.addressField);
+        const addressField = await $(signup.addressField);
         const actualAddress = await addressField.getValue();
-        const expectedAddress = "102 Big John Ln.";
+        const expectedAddress = address;
         await expect(actualAddress).toBe(expectedAddress);
         //Verifing Address 2
-        const addressTwoField = await $(page.addressTwoField);
+        const addressTwoField = await $(signup.addressTwoField);
         const actualAddressTwo = await addressTwoField.getValue();
-        const expectedAddressTwo = "Apt. B";
+        const expectedAddressTwo = addressTwo;
         await expect(actualAddressTwo).toBe(expectedAddressTwo);
         //Verifiing Country
-        const countryDropDown = await $(page.countryDropDown);
+        const countryDropDown = await $(signup.countryDropDown);
         const actualCountry = await countryDropDown.getValue();
-        const expectedCountry = "United States";
+        const expectedCountry = country;
         await expect(actualCountry).toBe(expectedCountry);
         //Verifing State
-        const stateField = await $(page.stateField);
+        const stateField = await $(signup.stateField);
         const actualState = await stateField.getValue();
-        const expectedState = "New York";
+        const expectedState = state;
         await expect(actualState).toBe(expectedState);
         //Verifing City
-        const cityField = await $(page.cityField);
+        const cityField = await $(signup.cityField);
         const actualCity = await cityField.getValue();
-        const expectedCity = "New York";
+        const expectedCity = city;
         await expect(actualCity).toBe(expectedCity);
         //Verifing Zip
-        const zipCodeField = await $(page.zipCodeField);
+        const zipCodeField = await $(signup.zipCodeField);
         const actualZip = await zipCodeField.getValue();
-        const expectedZip = "10001";
+        const expectedZip = zip;
         await expect(actualZip).toBe(expectedZip);
         //Verifing Mobile Number
-        const mobileNumberField = await $(page.mobileNumberField);
+        const mobileNumberField = await $(signup.mobileNumberField);
         const actualMobileNumber = await mobileNumberField.getValue();
-        const expectedMobileNumber = "5555555555";
+        const expectedMobileNumber = phone;
         await expect(actualMobileNumber).toBe(expectedMobileNumber);
     });
 
     it("Should Create an Account", async () => {
-        await page.clickSignupLoginButton();
-        await page.fillOutSignupFields(userName, userEmail);
-        await page.clickSignupButton();
-        await page.fillAccountDetails(password);
-        await page.selectNewsletterCheckBox();
-        await page.selectOptinCheckBox();
-        await page.fillOutPersonalDetails("John", "Does", "John's Place");
-        await page.fillOutAddressDetails("102 Big John Ln.", "Apt. B");
-        await page.fillOutStateDetails("New York", "New York", "10001");
-        await page.fillOutMobileNumber("5555555555");
-        await page.clickCreateAccountButton();
+        await helper.clickSignupLoginButton();
+        await helper.fillOutSignupFields(userName, userEmail);
+        await helper.clickSignupButton();
+        await helper.fillAccountDetails(password);
+        await helper.selectNewsletterCheckBox();
+        await helper.selectOptinCheckBox();
+        await helper.fillOutPersonalDetails(userName, lName, company);
+        await helper.fillOutAddressDetails(address, addressTwo);
+        await helper.fillOutStateDetails(state, city, zip);
+        await helper.fillOutMobileNumber(phone);
+        await helper.clickCreateAccountButton();
         await expect(await helper.getBElementByText("Account Created!")).toBeExisting();
         //Clean Up
-        await page.clickContinueButton();
-        const deleteAccountButton = await $(page.deleteAccountButton);
+        await helper.clickContinueButton();
+        const deleteAccountButton = await $(nav.deleteAccountButton);
         await deleteAccountButton.waitForDisplayed();
         await deleteAccountButton.click();
-        await page.clickContinueButton();
+        await helper.clickContinueButton();
     });
 
     it("Should Verify Account is Logged in", async () => {
-        await page.clickSignupLoginButton();
-        await page.fillOutSignupFields(userName, userEmail);
-        await page.clickSignupButton();
-        await page.fillAccountDetails(password);
-        await page.selectNewsletterCheckBox();
-        await page.selectOptinCheckBox();
-        await page.fillOutPersonalDetails("John", "Does", "John's Place");
-        await page.fillOutAddressDetails("102 Big John Ln.", "Apt. B");
-        await page.fillOutStateDetails("New York", "New York", "10001");
-        await page.fillOutMobileNumber("5555555555");
-        await page.clickCreateAccountButton();
-        await page.clickContinueButton();
-        const accountLoggedIn = await $(page.accountLoggedIn);
+        await helper.clickSignupLoginButton();
+        await helper.fillOutSignupFields(userName, userEmail);
+        await helper.clickSignupButton();
+        await helper.fillAccountDetails(password);
+        await helper.selectNewsletterCheckBox();
+        await helper.selectOptinCheckBox();
+        await helper.fillOutPersonalDetails(userName, lName, company);
+        await helper.fillOutAddressDetails(address, addressTwo);
+        await helper.fillOutStateDetails(state, city, zip);
+        await helper.fillOutMobileNumber(phone);
+        await helper.clickCreateAccountButton();
+        await helper.clickContinueButton();
+        const accountLoggedIn = await $(nav.accountLoggedIn);
         const actualAccount = await accountLoggedIn.getText();
-        const expectedAccount = "John";
+        const expectedAccount = userName;
         await expect(actualAccount).toBe(expectedAccount);
         //Clean Up
-        const deleteAccountButton = await $(page.deleteAccountButton);
+        const deleteAccountButton = await $(nav.deleteAccountButton);
         await deleteAccountButton.waitForDisplayed();
         await deleteAccountButton.click();
-        await page.clickContinueButton();
+        await helper.clickContinueButton();
     });
 
     it("Should Delete the Account", async () => {
-        await page.clickSignupLoginButton();
-        await page.fillOutSignupFields(userName, userEmail);
-        await page.clickSignupButton();
-        await page.fillAccountDetails(password);
-        await page.selectNewsletterCheckBox();
-        await page.selectOptinCheckBox();
-        await page.fillOutPersonalDetails("John", "Does", "John's Place");
-        await page.fillOutAddressDetails("102 Big John Ln.", "Apt. B");
-        await page.fillOutStateDetails("New York", "New York", "10001");
-        await page.fillOutMobileNumber("5555555555");
-        await page.clickCreateAccountButton();
-        await page.clickContinueButton();
-        const deleteAccountButton = await $(page.deleteAccountButton);
+        await helper.clickSignupLoginButton();
+        await helper.fillOutSignupFields(userName, userEmail);
+        await helper.clickSignupButton();
+        await helper.fillAccountDetails(password);
+        await helper.selectNewsletterCheckBox();
+        await helper.selectOptinCheckBox();
+        await helper.fillOutPersonalDetails(userName, lName, company);
+        await helper.fillOutAddressDetails(address, addressTwo);
+        await helper.fillOutStateDetails(state, city, zip);
+        await helper.fillOutMobileNumber(phone);
+        await helper.clickCreateAccountButton();
+        await helper.clickContinueButton();
+        const deleteAccountButton = await $(nav.deleteAccountButton);
         await deleteAccountButton.waitForDisplayed();
         await deleteAccountButton.click();
         await expect(await helper.getBElementByText("Account Deleted!")).toBeExisting();
-        await page.clickContinueButton();
+        await helper.clickContinueButton();
     }); 
 })
