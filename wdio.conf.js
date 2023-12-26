@@ -51,9 +51,23 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [
-         {browserName: 'firefox'
-        }],
-
+        {
+          maxInstances: 5,
+          browserName: "chrome",
+          acceptInsecureCerts: true,
+          'goog:chromeOptions': {
+            args: ['headless', 'disable-gpu']
+          } 
+        },
+        {
+          maxInstances: 5,
+          browserName: "firefox",
+          acceptInsecureCerts: true,
+          "moz:firefoxOptions": {
+            args: ["-headless"],
+          },
+        },
+      ],
     //
     // ===================
     // Test Configurations
@@ -101,7 +115,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['firefox-profile', 'chromedriver'],
+    services: ['geckodriver', 'chromedriver','intercept', 'firefox-profile'],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber

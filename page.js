@@ -126,7 +126,6 @@ module.exports = {
     },
     selectOptinCheckBox: async function () {
         const optinCheckBox = await $(this.optinCheckBox);
-        await optinCheckBox.scrollIntoView();
         await optinCheckBox.waitForDisplayed();
         await optinCheckBox.click();
     },
@@ -141,13 +140,11 @@ module.exports = {
     },
     clickCreateAccountButton: async function () {
         const createAccountButton = await $(this.createAccountButton);
-        await createAccountButton.scrollIntoView();
         await createAccountButton.waitForDisplayed();
         await createAccountButton.click();
     },
     clickContinueButton: async function () {
-        const continueButton = await $(this.continueButton);
-        await continueButton.scrollIntoView();     
+        const continueButton = await $(this.continueButton);    
         await continueButton.waitForDisplayed();
         await continueButton.click();
     },
@@ -159,7 +156,6 @@ module.exports = {
         await addressTwoField.waitForDisplayed();
         await addressTwoField.setValue(address2);
         const countryDropDown = await $(this.countryDropDown);
-        await countryDropDown.scrollIntoView();
         await countryDropDown.waitForDisplayed();
         await countryDropDown.click();
         const unitedStatesOption = await $(this.unitedStatesOption);

@@ -21,6 +21,9 @@
   "dependencies": {
     "chromedriver": "^120.0.1",
     "geckodriver": "^4.3.0",
-    "wdio-chromedriver-service": "^8.1.1"
+    "intercept": "^0.3.0",
+    "wdio-chromedriver-service": "^8.1.1",
+    "wdio-geckodriver-service": "^5.0.2",
+    "wdio-intercept-service": "^4.4.0"
   }
 }
