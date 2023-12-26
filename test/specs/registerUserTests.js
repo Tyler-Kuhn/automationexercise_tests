@@ -2,12 +2,13 @@ const page = require("../../page.js");
 const helper = require("../../helper.js");
 
 const userName = "John";
+const password = "TestPass1!"
 let userEmail;
 
 if (browser.capabilities.browserName === 'chrome') {
-    userEmail = 'johntestchrome@example.com';
+    userEmail = 'johntestchrome@gmail.com';
 } else if (browser.capabilities.browserName === 'firefox') {
-    userEmail = 'johntestfire@example.com';
+    userEmail = 'johntestfire@gmail.com';
 };
 
 describe("Test Case 1: Registering a User", () => {
@@ -78,7 +79,7 @@ describe("Test Case 1: Registering a User", () => {
         await page.clickSignupLoginButton();
         await page.fillOutSignupFields(userName, userEmail);
         await page.clickSignupButton();
-        await page.fillAccountDetails("TestPass1!");
+        await page.fillAccountDetails(password);
         await page.selectNewsletterCheckBox();
         await page.selectOptinCheckBox();
         await page.fillOutPersonalDetails("John", "Does", "John's Place");
@@ -126,7 +127,7 @@ describe("Test Case 1: Registering a User", () => {
         await page.clickSignupLoginButton();
         await page.fillOutSignupFields(userName, userEmail);
         await page.clickSignupButton();
-        await page.fillAccountDetails("TestPass1!");
+        await page.fillAccountDetails(password);
         await page.selectNewsletterCheckBox();
         await page.selectOptinCheckBox();
         await page.fillOutPersonalDetails("John", "Does", "John's Place");
@@ -147,7 +148,7 @@ describe("Test Case 1: Registering a User", () => {
         await page.clickSignupLoginButton();
         await page.fillOutSignupFields(userName, userEmail);
         await page.clickSignupButton();
-        await page.fillAccountDetails("TestPass1!");
+        await page.fillAccountDetails(password);
         await page.selectNewsletterCheckBox();
         await page.selectOptinCheckBox();
         await page.fillOutPersonalDetails("John", "Does", "John's Place");
@@ -171,7 +172,7 @@ describe("Test Case 1: Registering a User", () => {
         await page.clickSignupLoginButton();
         await page.fillOutSignupFields(userName, userEmail);
         await page.clickSignupButton();
-        await page.fillAccountDetails("TestPass1!");
+        await page.fillAccountDetails(password);
         await page.selectNewsletterCheckBox();
         await page.selectOptinCheckBox();
         await page.fillOutPersonalDetails("John", "Does", "John's Place");

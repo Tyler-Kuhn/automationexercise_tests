@@ -50,22 +50,9 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
-        browserName: 'firefox'
-    },/*{
-       browserName: 'chrome',
-        'goog:chromeOptions': {
-            prefs: {
-                'profile.managed_default_content_settings.autofill': 2,
-                'autofill': {
-                    'enabled': false
-                },
-                'credentials_enable_service': false,
-                'profile.password_manager_enabled': false
-            },
-            args: ['--disable-infobars', '--disable-extensions']
-        }
-    }*/],
+    capabilities: [
+         {browserName: 'firefox'
+        }],
 
     //
     // ===================
@@ -114,7 +101,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['firefox-profile'],
+    services: ['firefox-profile', 'chromedriver'],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber

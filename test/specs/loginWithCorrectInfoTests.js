@@ -6,13 +6,14 @@ const userName = "Tim";
 let userEmail;
 
 if (browser.capabilities.browserName === 'chrome') {
-    userEmail = 'timtestchrome@example.com';
+    userEmail = 'timtestchrome@gmail.com';
 } else if (browser.capabilities.browserName === 'firefox') {
-    userEmail = 'timtestfire@example.com';
+    userEmail = 'timtestfire@gmail.com';
 };
 
 describe("Test Case 2: Login With Correct Info", () => {
     before( async () => {
+        await browser.pause(5000);
         await browser.url("/");
         await page.clickSignupLoginButton();
         await page.fillOutSignupFields(userName, userEmail);
