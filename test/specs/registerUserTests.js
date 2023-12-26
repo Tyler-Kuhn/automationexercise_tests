@@ -24,7 +24,7 @@ if (browser.capabilities.browserName === 'chrome') {
     userEmail = 'johntestfire@gmail.com';
 };
 
-describe.skip("Test Case 1: Registering a User", () => {
+describe("Test Case 1: Registering a User", () => {
 
     beforeEach( async () => {
         await browser.url("/");
