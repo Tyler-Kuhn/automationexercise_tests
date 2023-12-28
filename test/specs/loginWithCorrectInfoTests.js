@@ -5,6 +5,14 @@ const nav = require("../../pages/navigationBar.js")
 
 const password = "TestPass1!";
 const userName = "Tim";
+const lName = "Dot";
+const company = "Tim's Place";
+const address = "102 Big John Ln.";
+const addressTwo = "Apt. B";
+const state = "New York";
+const city = "New York";
+const zip = "10001";
+const phone = "5555555555";
 let userEmail;
 
 if (browser.capabilities.browserName === "chrome") {
@@ -23,10 +31,10 @@ describe("Test Case 2: Login With Correct Info", () => {
     await helper.fillAccountDetails(password);
     await helper.selectNewsletterCheckBox();
     await helper.selectOptinCheckBox();
-    await helper.fillOutPersonalDetails("Tim", "Dot", "Tim's Place");
-    await helper.fillOutAddressDetails("102 Big John Ln.", "Apt. B");
-    await helper.fillOutStateDetails("New York", "New York", "10001");
-    await helper.fillOutMobileNumber("5555555555");
+    await helper.fillOutPersonalDetails(userName, lName, company);
+    await helper.fillOutAddressDetails(address, addressTwo);
+    await helper.fillOutStateDetails(state, city, zip);
+    await helper.fillOutMobileNumber(phone);
     await helper.clickCreateAccountButton();
     await helper.clickContinueButton();
     await helper.clickHomeButton();
