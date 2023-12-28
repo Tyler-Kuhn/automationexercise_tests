@@ -1,7 +1,7 @@
 
 const helper = require("../../pages/helper.js");
 const login = require("../../pages/loginPage.js");
-const nav = require("../../pages/navigationBar.js")
+const nav = require("../../pages/navigationBar.js");
 
 const password = "TestPass1!";
 const userName = "Tim";
@@ -9,44 +9,78 @@ const lName = "Dot";
 const company = "Tim's Place";
 const address = "102 Big John Ln.";
 const addressTwo = "Apt. B";
+const day = "10";
+const month = "August";
+const year = "1987";
+const country = "United States";
 const state = "New York";
 const city = "New York";
 const zip = "10001";
 const phone = "5555555555";
+const title = "Mr"
 let userEmail;
 
 if (browser.capabilities.browserName === "chrome") {
   userEmail = "timtestchrome@gmail.com";
 } else if (browser.capabilities.browserName === "firefox") {
   userEmail = "timtestfire@gmail.com";
+} else {
+  userEmail = "timtestapi@gmail.com";
 }
 
 describe("Test Case 2: Login With Correct Info", () => {
-
+  //Account creation
   before(async () => {
-    await browser.url("/");
-    await helper.clickSignupLoginButton();
-    await helper.fillOutSignupFields(userName, userEmail);
-    await helper.clickSignupButton();
-    await helper.fillAccountDetails(password);
-    await helper.selectNewsletterCheckBox();
-    await helper.selectOptinCheckBox();
-    await helper.fillOutPersonalDetails(userName, lName, company);
-    await helper.fillOutAddressDetails(address, addressTwo);
-    await helper.fillOutStateDetails(state, city, zip);
-    await helper.fillOutMobileNumber(phone);
-    await helper.clickCreateAccountButton();
-    await helper.clickContinueButton();
-    await helper.clickHomeButton();
-    await helper.clickLogout();
-    await helper.clickHomeButton();
+    try {
+      const response = await axios.post('https://automationexercise.com/api/createAccount', {
+        name: userName,
+        email: userEmail, 
+        password: password, 
+        title: title,
+        birth_date: day,
+        birth_month: month, 
+        birth_year: year, 
+        firstname: userName, 
+        lastname: lName, 
+        company: company, 
+        address1: address, 
+        address2: addressTwo, 
+        country: country, 
+        zipcode: zip, 
+        state: state, 
+        city: city, 
+        mobile_number: phone
+      });
+
+      if (response.status === 200) {
+        console.log('Account created successfully');
+      } else {
+        console.log('Failed to create account');
+      }
+    } catch (error) {
+      console.error('Error creating account:', error);
+    }
   });
+
+  beforeEach(async () =>{
+    browser.url("/");
+  });
+  //Clean Up
   after(async () => {
-    await helper.clickHomeButton();
-    await helper.clickSignupLoginButton();
-    await helper.loginToAccount(userEmail, password);
-    await helper.deleteAccount();
-    await helper.clickContinueButton();
+    try {
+      const response = await axios.delete('https://automationexercise.com/api/deleteAccount', {
+        email: userEmail,
+        password: password
+      });
+  
+      if (response.status === 200) {
+        console.log('Account deleted successfully');
+      } else {
+        console.log('Failed to delete account');
+      }
+    } catch (error) {
+      console.error('Error deleting account:', error);
+    }
   });
   it("Should Open the homepage", async () => {
     const homepageTitle = await browser.getTitle();
@@ -60,6 +94,7 @@ describe("Test Case 2: Login With Correct Info", () => {
     await expect(banner).toBeExisting();
   });
   it("Should Fill out login fields", async () => {
+    await helper.clickSignupLoginButton();
     const loginEmailField = await $(login.loginEmailField);
     await loginEmailField.waitForDisplayed();
     await loginEmailField.setValue(userEmail);
