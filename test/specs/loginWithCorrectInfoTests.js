@@ -82,6 +82,8 @@ describe("Test Case 2: Login With Correct Info", () => {
       console.error('Error deleting account:', error);
     }
   });
+
+  //Tests
   it("Should Open the homepage", async () => {
     const homepageTitle = await browser.getTitle();
     const expectedTitle = "Automation Exercise";
