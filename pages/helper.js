@@ -1,6 +1,7 @@
 const nav = require("./navigationBar.js");
 const login = require("./loginPage.js");
 const signup = require("./signUpPage.js");
+const ads = require("./adsPage.js");
 
 module.exports = {
     getH2ElementByText: async function (obj) {
@@ -129,5 +130,19 @@ module.exports = {
         const deleteAccountButton = await $(nav.deleteAccountButton);
         await deleteAccountButton.waitForDisplayed();
         await deleteAccountButton.click();
+    },
+    checkAndCloseAd: async function () {
+        const adSelector = await $(ads.adModel); 
+        const closeButtonSelector = await $(ads.closeAdButton);
+        // Check if ad is displayed
+        if (await $(adSelector).isDisplayed()) {
+            // If there's a close button, click it
+            if (await $(closeButtonSelector).isDisplayed()) {
+                await $(closeButtonSelector).click();
+            } else {
+                // If there's no close button, wait for the ad to disappear
+                await browser.pause(10000); // Adjust the time as necessary
+            }
+        }
     }
 }

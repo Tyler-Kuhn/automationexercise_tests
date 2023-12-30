@@ -34,21 +34,21 @@ describe("Test Case 2: Login With Correct Info", () => {
     try {
       const response = await axios.post('https://automationexercise.com/api/createAccount', {
         name: userName,
-        email: userEmail, 
-        password: password, 
+        email: userEmail,
+        password: password,
         title: title,
         birth_date: day,
-        birth_month: month, 
-        birth_year: year, 
-        firstname: userName, 
-        lastname: lName, 
-        company: company, 
-        address1: address, 
-        address2: addressTwo, 
-        country: country, 
-        zipcode: zip, 
-        state: state, 
-        city: city, 
+        birth_month: month,
+        birth_year: year,
+        firstname: userName,
+        lastname: lName,
+        company: company,
+        address1: address,
+        address2: addressTwo,
+        country: country,
+        zipcode: zip,
+        state: state,
+        city: city,
         mobile_number: phone
       });
 
@@ -62,7 +62,7 @@ describe("Test Case 2: Login With Correct Info", () => {
     }
   });
 
-  beforeEach(async () =>{
+  beforeEach(async () => {
     browser.url("/");
   });
   //Clean Up
@@ -72,7 +72,7 @@ describe("Test Case 2: Login With Correct Info", () => {
         email: userEmail,
         password: password
       });
-  
+
       if (response.status === 200) {
         console.log('Account deleted successfully');
       } else {
