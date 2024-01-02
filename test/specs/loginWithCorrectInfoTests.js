@@ -1,7 +1,7 @@
 
 const helper = require("../../pages/helper.js");
 const login = require("../../pages/loginPage.js");
-const nav = require("../../pages/navigationBar.js");
+
 
 const password = "TestPass1!";
 const userName = "Tim";
