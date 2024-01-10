@@ -1,4 +1,13 @@
-module.exports = {
-    closeAdButton: '#dismiss-button',
-    adModel: '#aswift_1',
+const Page = require('./page');
+
+class AdsPage extends Page {
+
+    get closeAdButton () {return $('#dismiss-button')}
+    get adModel () {return $('#aswift_1')}
+
+    open () {
+        return super.open('login');
+    }
 }
+
+modules.export = new AdsPage();

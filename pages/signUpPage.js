@@ -1,43 +1,48 @@
-module.exports = {
+const Page = require('./page');
+
+class SignupPage extends Page {
+
     //Fields
-    signupPasswordField: 'input[data-qa="password"]',
-    firstNameField: 'input[data-qa="first_name"]',
-    lastNameField: 'input[data-qa="last_name"]',
-    companyField: 'input[data-qa="company"]',
-    addressField: 'input[data-qa="address"]',
-    addressTwoField: 'input[data-qa="address2"]',
-    stateField: 'input[data-qa="state"]',
-    cityField: 'input[data-qa="city"]',
-    zipCodeField: 'input[data-qa="zipcode"]',
-    mobileNumberField: 'input[data-qa="mobile_number"]',
+    get signupPasswordField () {return $('input[data-qa="password"]')}
+    get firstNameField () {return $('input[data-qa="first_name"]')}
+    get lastNameField () {return $('input[data-qa="last_name"]')}
+    get companyField () {return $('input[data-qa="company"]')}
+    get addressField () {return $('input[data-qa="address"]')}
+    get addressTwoField () {return $('input[data-qa="address2"]')}
+    get stateField () {return $('input[data-qa="state"]')}
+    get cityField () {return $('input[data-qa="city"]')}
+    get zipCodeField () {return $('input[data-qa="zipcode"]')}
+    get mobileNumberField () {return $('input[data-qa="mobile_number"]')}
     //Radio Options
-    mrRadioButton: 'input[value="Mr"]',
-    mrsRadioButton: 'input[value="Mrs"]',
+    get mrRadioButton () {return $('input[value="Mr"]')}
+    get mrsRadioButton () {return $('input[value="Mrs"]')}
     //DropDown Menus
-    dobDayDropDown: 'select[data-qa="days"]',
+    get dobDayDropDown () {return $('select[data-qa="days"]')}
         //Day Options
-        dayOptionTen: '#days > option:nth-child(11)',
-        dayOptionTwo: '#days > option:nth-child(3)',
+        get dayOptionTen () {return $('#days > option:nth-child(11)')}
+        get dayOptionTwo () {return $('#days > option:nth-child(3)')}
 
-    dobMonthDropDown: 'select[data-qa="months"]',
+    get dobMonthDropDown () {return $('select[data-qa="months"]')}
         //Month Options
-        monthOptionJan: '#months > option:nth-child(2)',
-        monthOptionFeb: '#months > option:nth-child(3)',
+        get monthOptionJan () {return $('#months > option:nth-child(2)')}
+        get monthOptionFeb () {return $('#months > option:nth-child(3)')}
 
-    dobYearDropDown: 'select[data-qa="years"]',
+    get dobYearDropDown () {return $('select[data-qa="years"]')}
         //Year Options
-        yearOption1986: 'option[value="1986"]',
-        yearOption2011: 'option[value="2011"]',
+        get yearOption1986 () {return $('option[value="1986"]')}
+        get yearOption2011 () {return $('option[value="2011"]')}
 
-    countryDropDown: 'select[data-qa="country"]',
+    get countryDropDown () {return $('select[data-qa="country"]')}
         //Country Options
-        unitedStatesOption: 'option[value="United States"]',
+        get unitedStatesOption () {return $('option[value="United States"]')}
     //Checkboxes
-    newsletterCheckBox: 'input[id="newsletter"]',
-    optinCheckBox: 'input[id="optin"]',
+    get newsletterCheckBox () {return $('input[id="newsletter"]')}
+    get optinCheckBox () {return $('input[id="optin"]')}
     //Buttons
-    createAccountButton: 'button[data-qa="create-account"]',
+    get createAccountButton () {return $('button[data-qa="create-account"]')}
 //Account Created Page
     //Buttons
-    continueButton: 'a[data-qa="continue-button"]',
+    get continueButton () {return $('a[data-qa="continue-button"]')}
 }
+
+module.exports = new SignupPage();
