@@ -96,6 +96,70 @@ class SignupPage extends Page {
   get continueButton() {
     return $('a[data-qa="continue-button"]');
   }
+
+  //Helper Functions
+  async fillAccountDetails(password) {
+    await this.mrRadioButton.waitForDisplayed();
+    await this.mrRadioButton.click();
+    await this.signupPasswordField.setValue(password);
+    await this.dobDayDropDown.click();
+    await this.dayOptionTen.waitForDisplayed();
+    await this.dayOptionTen.click();
+    await this.dobMonthDropDown.click();
+    await this.monthOptionFeb.waitForDisplayed();
+    await this.monthOptionFeb.click();
+    await this.dobYearDropDown.click();
+    await this.yearOption1986.waitForDisplayed();
+    await this.yearOption1986.click();
+  }
+
+  async selectNewsletterCheckBox() {
+    await this.newsletterCheckBox.waitForDisplayed();
+    await this.newsletterCheckBox.click();
+  }
+
+  async selectOptinCheckBox() {
+    await this.optinCheckBox.waitForDisplayed();
+    await this.optinCheckBox.click();
+  }
+
+  async fillOutPersonalDetails(firstName, lastName, company) {
+    await this.firstNameField.waitForDisplayed();
+    await this.firstNameField.setValue(firstName);
+    await this.lastNameField.setValue(lastName);
+    await this.companyField.setValue(company);
+  }
+
+  async clickCreateAccountButton() {
+    await this.createAccountButton.waitForDisplayed();
+    await this.createAccountButton.click();
+}
+
+    async clickContinueButton() {    
+    await this.continueButton.waitForDisplayed();
+    await this.continueButton.click();
+}
+
+async fillOutAddressDetails(address1, address2) {
+    await this.addressField.waitForDisplayed();
+    await this.addressField.setValue(address1);
+    await this.addressTwoField.waitForDisplayed();
+    await this.addressTwoField.setValue(address2);
+    await this.countryDropDown.waitForDisplayed();
+    await this.countryDropDown.click();
+    await this.unitedStatesOption.waitForDisplayed();
+    await this.unitedStatesOption.click();
+}
+
+async fillOutStateDetails(state, city, zipcode) {
+    await this.stateField.setValue(state);
+    await this.cityField.setValue(city);
+    await this.zipCodeField.setValue(zipcode);
+}
+async fillOutMobileNumber(number) {
+    await this.mobileNumberField.waitForDisplayed();
+    await this.mobileNumberField.setValue(number);
+}
 }
 
 module.exports = new SignupPage();

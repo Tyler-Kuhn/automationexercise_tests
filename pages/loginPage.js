@@ -20,6 +20,27 @@ class LoginPage extends Page {
   get loginButton() {
     return $('button[data-qa="login-button"]');
   }
+  //Helper Functions
+  async loginToAccount(email, password) {
+    await this.loginEmailField.waitForDisplayed();
+    await this.loginEmailField.setValue(email);
+    await this.loginPasswordField.waitForDisplayed();
+    await this.loginPasswordField.setValue(password);
+    await this.loginButton.waitForDisplayed();
+    await this.loginButton.click();
+  }
+
+  async fillOutSignupFields(name, email) {
+    await this.signupNameField.setValue(name);
+    await this.signupEmailField.setValue(email);
+  }
+
+  async clickSignupButton() {
+    await this.signupButton.waitForDisplayed();
+    await this.signupButton.click();
+  }
+
+  
 }
 
 module.exports = new LoginPage();
