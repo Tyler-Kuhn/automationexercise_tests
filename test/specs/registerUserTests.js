@@ -203,4 +203,4 @@ describe("Test Case 1: Registering a User", () => {
         await expect(await page.getBElementByText("Account Deleted!")).toBeExisting();
         await SignupPage.clickContinueButton();
     }); 
-})
+});
