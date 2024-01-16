@@ -1,6 +1,6 @@
 module.exports = class Page {
   //Open Browser
-  open(path) {
+  open () {
     return browser.url("/");
   }
 

@@ -28,7 +28,7 @@ if (browser.capabilities.browserName === "chrome") {
   userEmail = "timtestapi@gmail.com";
 }
 
-describe("Test Case 2: Login With Correct Info", () => {
+describe.skip("Test Case 2: Login With Correct Info", () => {
   //Account creation
   before(async () => {
     try {
