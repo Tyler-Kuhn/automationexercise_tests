@@ -1,6 +1,10 @@
 
-const helper = require("../../pages/helper.js");
-const login = require("../../pages/loginPage.js");
+const Page = require("../../pages/page.js");
+const LoginPage = require("../../pages/loginPage.js");
+const SignupPage = require("../../pages/signUpPage.js");
+const AdsPage = require("../../pages/adsPage.js");
+
+const page = new Page();
 
 
 const password = "TestPass1!";
@@ -28,9 +32,9 @@ if (browser.capabilities.browserName === "chrome") {
   userEmail = "timtestapi@gmail.com";
 }
 
-describe.skip("Test Case 2: Login With Correct Info", () => {
+describe("Test Case 2: Login With Correct Info", () => {
   //Account creation
-  before(async () => {
+  before("Create Account", async () => {
     try {
       const response = await axios.post('https://automationexercise.com/api/createAccount', {
         name: userName,
@@ -62,11 +66,11 @@ describe.skip("Test Case 2: Login With Correct Info", () => {
     }
   });
 
-  beforeEach(async () => {
-    browser.url("/");
-  });
+  beforeEach("Open Browser Hook", async () => {
+    await page.open();
+    });
   //Clean Up
-  after(async () => {
+  after("Deleted Account", async () => {
     try {
       const response = await axios.delete('https://automationexercise.com/api/deleteAccount', {
         email: userEmail,
@@ -90,21 +94,19 @@ describe.skip("Test Case 2: Login With Correct Info", () => {
     await expect(homepageTitle).toBe(expectedTitle);
   });
   it("Should move to the Login page", async () => {
-    await helper.clickSignupLoginButton();
-    const banner = await helper.getH2ElementByText("Login to your account");
+    await page.clickSignupLoginButton();
+    const banner = await page.getH2ElementByText("Login to your account");
     await banner.waitForDisplayed();
     await expect(banner).toBeExisting();
   });
   it("Should Fill out login fields", async () => {
-    await helper.clickSignupLoginButton();
-    const loginEmailField = await $(login.loginEmailField);
-    await loginEmailField.waitForDisplayed();
-    await loginEmailField.setValue(userEmail);
-    const actualEmail = await loginEmailField.getValue();
-    const loginPasswordField = await $(login.loginPasswordField);
-    await loginPasswordField.waitForDisplayed();
-    await loginPasswordField.setValue(password);
-    const actualPassword = await loginPasswordField.getValue();
+    await page.clickSignupLoginButton();
+    await LoginPage.loginEmailField.waitForDisplayed();
+    await LoginPage.loginEmailField.setValue(userEmail);
+    const actualEmail = await LoginPage.loginEmailField.getValue();
+    await LoginPage.loginPasswordField.waitForDisplayed();
+    await LoginPage.loginPasswordField.setValue(password);
+    const actualPassword = await LoginPage.loginPasswordField.getValue();
     const expectedEmail = userEmail;
     const expectedPassword = password;
     await expect(actualEmail).toBe(expectedEmail);

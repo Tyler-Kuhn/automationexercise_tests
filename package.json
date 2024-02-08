@@ -16,6 +16,7 @@
     "@wdio/mocha-framework": "^8.24.6",
     "@wdio/selenium-standalone-service": "^8.15.0",
     "@wdio/spec-reporter": "^8.24.2",
+    "wdio-video-reporter": "^5.1.4",
     "wdio-wait-for": "^3.0.9"
   },
   "dependencies": {

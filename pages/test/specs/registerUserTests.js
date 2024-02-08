@@ -2,6 +2,7 @@
 const Page = require("../../pages/page.js");
 const LoginPage = require("../../pages/loginPage.js");
 const SignupPage = require("../../pages/signUpPage.js");
+const AdsPage = require("../../pages/adsPage.js");
 
 const page = new Page();
 
@@ -196,7 +197,9 @@ describe("Test Case 1: Registering a User", () => {
         await SignupPage.fillOutStateDetails(state, city, zip);
         await SignupPage.fillOutMobileNumber(phone);
         await SignupPage.clickCreateAccountButton();
+        await AdsPage.checkAndCloseAdWhileInteracting();
         await SignupPage.clickContinueButton();
+        await AdsPage.checkAndCloseAdWhileInteracting();
         const deleteAccountButton = await page.deleteAccountButton;
         await deleteAccountButton.waitForDisplayed();
         await deleteAccountButton.click();

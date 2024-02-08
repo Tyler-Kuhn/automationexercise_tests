@@ -131,12 +131,10 @@ class SignupPage extends Page {
   }
 
   async clickCreateAccountButton() {
-    await this.createAccountButton.waitForDisplayed();
     await this.createAccountButton.click();
 }
 
     async clickContinueButton() {    
-    await this.continueButton.waitForDisplayed();
     await this.continueButton.click();
 }
 
